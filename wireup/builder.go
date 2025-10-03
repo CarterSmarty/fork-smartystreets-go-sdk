@@ -38,6 +38,7 @@ type clientBuilder struct {
 	http2Disabled bool
 	client        *http.Client
 	licenses      []string
+	features      string
 }
 
 func newClientBuilder() *clientBuilder {
@@ -196,6 +197,7 @@ func (b *clientBuilder) buildHTTPClient() (wrapped internal.HTTPClient) {
 	wrapped = internal.NewBaseURLClient(wrapped, b.baseURL)
 	wrapped = internal.NewKeepAliveCloseClient(wrapped, b.close)
 	wrapped = internal.NewLicenseClient(wrapped, b.licenses...)
+	wrapped = internal.NewFeaturesClient(wrapped, b.features)
 	// outer-most
 	return wrapped
 }

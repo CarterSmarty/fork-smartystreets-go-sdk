@@ -188,3 +188,9 @@ func WithLicenses(licenses ...string) Option {
 		builder.licenses = append(builder.licenses, licenses...)
 	}
 }
+
+func WithFeatures(features string) Option {
+	return func(builder *clientBuilder) {
+		builder.features = features
+	}
+}
